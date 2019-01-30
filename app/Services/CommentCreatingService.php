@@ -2,13 +2,14 @@
 
 namespace App\Services;
 
-use App\Repositories\CommentRepository;
-use App\Repositories\UserRepository;
+use App\Repositories\CommentInterface;
+use App\Repositories\CommentRepositoryInterface;
+use App\Repositories\UserInterface;
+use App\Repositories\UserRepositoryInterface;
 
-class CreateCommentService
+class CommentCreatingService
 {
-    //
-    public function __construct(UserRepository $userRepo, CommentRepository $commentRepo)
+    public function __construct(UserRepositoryInterface $userRepo, CommentRepositoryInterface $commentRepo)
     {
         $this->userRepo = $userRepo;
         $this->commentRepo = $commentRepo;

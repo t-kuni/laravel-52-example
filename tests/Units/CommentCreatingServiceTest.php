@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 //use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class CreateCommentServiceTest extends TestCase
+class CommentCreatingServiceTest extends TestCase
 {
 //    use DatabaseMigrations;
     use DatabaseTransactions;
@@ -13,9 +13,11 @@ class CreateCommentServiceTest extends TestCase
 
     public function setUp()
     {
+        parent::setUp();
+
         $userRepo = new \App\Repositories\UserRepository();
         $commentRepo = new \App\Repositories\CommentRepository();
-        $this->service = new \App\Services\CreateCommentService($userRepo, $commentRepo);
+        $this->service = new \App\Services\CommentCreatingService($userRepo, $commentRepo);
     }
 
     /**
@@ -31,6 +33,14 @@ class CreateCommentServiceTest extends TestCase
         $name = "私の名前";
         $body = "コメント本文";
         $this->service->createComment($email, $password, $name, $body);
-        $this->assertTrue(true);
+
+        $this->seeInDatabase('users', [
+            'email' => $email,
+            'password' => $password,
+        ]);
+        $this->seeInDatabase('comments', [
+            'name' => $name,
+            'body' => $body,
+        ]);
     }
 }

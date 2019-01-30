@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Comment;
 
-class CommentRepository
+class CommentRepository implements CommentRepositoryInterface
 {
     //
 
