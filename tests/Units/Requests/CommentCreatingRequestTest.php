@@ -1,19 +1,12 @@
 <?php
 
+use App\Http\Requests\CommentCreatingRequest;
+
 class CommentCreatingRequestTest extends TestCase
 {
-    protected static $REQUEST_CLASS = \App\Http\Requests\CommentCreatingRequest::class;
-
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->request = new \App\Http\Requests\CommentCreatingRequest();
-    }
-
     private function throughValidator($data)
     {
-        $request = new (static::REQUEST_CLASS)();
+        $request = new CommentCreatingRequest();
         $rules = $request->rules();
         $validator = Validator::make($data, $rules);
         return $validator->passes();

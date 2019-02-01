@@ -24,10 +24,10 @@ class CommentCreatingRequest extends Request
     public function rules()
     {
         return [
-            'email' => 'require|email',
-            'password' => 'require|string|min:6|max:10',
-            'name' => 'require|string|max:10',
-            'body' => 'require|string|max:10',
+            'email' => 'required|email',
+            'password' => 'required|string|min:6|max:10',
+            'name' => 'required|string|max:10',
+            'body' => 'required|string|max:10',
         ];
     }
 }
